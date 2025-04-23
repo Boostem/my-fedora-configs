@@ -3,7 +3,7 @@
     name:
       - git
       - curl
-      - htop
+      - btop
       - nmap
       - nodejs
       - maven
