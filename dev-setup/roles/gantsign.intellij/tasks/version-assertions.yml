@@ -1,0 +1,4 @@
+# checksum assertion removed by user request
+- name: skip checksum assertion
+  debug:
+    msg: "Checksum verification disabled"

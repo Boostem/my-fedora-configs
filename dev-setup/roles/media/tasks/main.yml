@@ -1,0 +1,12 @@
+- name: Install VLC, GIMP, Kdenlive
+  package:
+    name:
+      - vlc
+      - gimp
+      - kdenlive
+    state: present
+
+- name: Install Steam via Flatpak
+  flatpak:
+    name: com.valvesoftware.Steam
+    state: present

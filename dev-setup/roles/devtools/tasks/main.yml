@@ -1,0 +1,45 @@
+- name: Install dev tools via dnf
+  dnf:
+    name:
+      - git
+      - curl
+      - htop
+      - nmap
+      - nodejs
+      - maven
+      - python3
+    state: present
+
+- name: Install Docker using official script
+  shell: |
+    curl -fsSL https://get.docker.com | sh
+  args:
+    creates: /usr/bin/docker
+
+- name: Enable Docker service
+  systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Generate SSH key (if not exists)
+  become: false
+  ansible.builtin.openssh_keypair:
+    path: "/home/boostem/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    force: false
+    owner: boostem
+    group: boostem
+    mode: '0600'
+
+- name: Create GitHub and Projects directories in home
+  file:
+    path: "/home/boostem/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: boostem
+    group: boostem
+  with_items:
+    - GitHub
+    - Projects

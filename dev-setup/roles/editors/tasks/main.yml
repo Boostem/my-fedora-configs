@@ -1,0 +1,38 @@
+- name: Find IntelliJ config folder
+  find:
+    paths: "/home/boostem/.config/JetBrains"
+    patterns: "IntelliJIdea*/options"
+    file_type: directory
+  register: intellij_config_dirs
+
+- name: Configure IntelliJ UI settings
+  copy:
+    dest: "{{ item.path }}/ui.lnf.xml"
+    content: |
+      <application>
+        <component name="UISettings">
+          <property name="TREE_INDENT" value="8" />
+          <property name="FOLLOW_CURRENT_EDITOR" value="true" />
+          <property name="THEME" value="Darcula" />
+        </component>
+      </application>
+    owner: boostem
+    group: boostem
+    mode: '0644'
+  loop: "{{ intellij_config_dirs.files }}"
+  when: intellij_config_dirs.matched > 0
+
+- name: Install Obsidian via Flatpak
+  flatpak:
+    name: md.obsidian.Obsidian
+    state: present
+
+
+- name: Ensure VS Code config directory exists
+  file:
+    path: /home/boostem/.config/Code/User
+    state: directory
+    owner: boostem
+    group: boostem
+    mode: '0755'
+

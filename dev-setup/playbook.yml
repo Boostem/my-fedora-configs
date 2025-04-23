@@ -1,0 +1,22 @@
+- hosts: local
+  become: true
+  vars_files:
+    - group_vars/all.yml
+  roles:
+    - role: gantsign.intellij
+      users:
+        - username: "{{ ansible_user }}"
+          ide_name: idea
+          edition: ultimate
+          plugins:
+            - github-copilot
+            - idea-gitignore
+            - ideavim
+        - username: "{{ ansible_user }}"
+          extensions: "{{ vscode_extensions }}"
+    - role: geerlingguy.docker
+    - devtools
+    - editors
+    - media
+    - comms
+    - utilities

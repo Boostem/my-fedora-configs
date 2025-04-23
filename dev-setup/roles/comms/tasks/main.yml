@@ -1,0 +1,9 @@
+- name: Install Discord via Flatpak
+  flatpak:
+    name: com.discordapp.Discord
+    state: present
+
+- name: Install Spotify via Flatpak
+  flatpak:
+    name: com.spotify.Client
+    state: present
