@@ -1,13 +1,14 @@
-- name: Find IntelliJ config folder
-  find:
-    paths: "/home/boostem/.config/JetBrains"
-    patterns: "IntelliJIdea*/options"
-    file_type: directory
-  register: intellij_config_dirs
+- name: Create IntelliJ config path if not exists
+  file:
+    path: "/home/boostem/.config/JetBrains/IntelliJIdea2025.1/options"
+    state: directory
+    owner: boostem
+    group: boostem
+    mode: '0755'
 
 - name: Configure IntelliJ UI settings
   copy:
-    dest: "{{ item.path }}/ui.lnf.xml"
+    dest: "/home/boostem/.config/JetBrains/IntelliJIdea2025.1/options/ui.lnf.xml"
     content: |
       <application>
         <component name="UISettings">
@@ -19,14 +20,11 @@
     owner: boostem
     group: boostem
     mode: '0644'
-  loop: "{{ intellij_config_dirs.files }}"
-  when: intellij_config_dirs.matched > 0
 
 - name: Install Obsidian via Flatpak
   flatpak:
     name: md.obsidian.Obsidian
     state: present
-
 
 - name: Ensure VS Code config directory exists
   file:
@@ -35,4 +33,3 @@
     owner: boostem
     group: boostem
     mode: '0755'
-
