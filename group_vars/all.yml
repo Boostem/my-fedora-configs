@@ -1,0 +1,12 @@
+python_version: "3"
+node_version: "lts"
+  - ms-python.python
+  - github.copilot
+  - eamodio.gitlens
+  - pkief.theme-darcula
+
+intellij_edition: "ultimate"
+intellij_version: "latest"
+intellij_plugins:
+  - name: github-copilot
+    id: com.github.copilot

@@ -1,0 +1,39 @@
+- name: Install Node.js, npm, and yarn
+  become: true
+  package:
+    name:
+      - nodejs
+      - npm
+      - yarnpkg
+    state: present
+  tags: frontend
+
+- name: Install Vite globally
+  become: true
+  npm:
+    name: vite
+    global: yes
+  tags: frontend
+
+- name: Install pnpm globally
+  become: true
+  npm:
+    name: pnpm
+    global: yes
+  tags: frontend
+
+- name: Install git-lfs
+  become: true
+  package:
+    name: git-lfs
+    state: present
+  tags: frontend
+
+- name: Install ripgrep and fd
+  become: true
+  package:
+    name:
+      - ripgrep
+      - fd-find
+    state: present
+  tags: frontend

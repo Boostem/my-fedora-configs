@@ -1,0 +1,7 @@
+- name: Install IntelliJ IDEA Ultimate via Flatpak
+  become: true
+  shell: |
+    flatpak install -y flathub com.jetbrains.IntelliJ-IDEA-Ultimate
+  args:
+    creates: /var/lib/flatpak/app/com.jetbrains.IntelliJ-IDEA-Ultimate
+  tags: ide
