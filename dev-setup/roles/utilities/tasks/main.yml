@@ -1,5 +1,0 @@
-- name: Ensure Flatpak and Flathub repo are enabled
-  shell: |
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  args:
-    creates: /var/lib/flatpak/repo/flathub.flatpakrepo
