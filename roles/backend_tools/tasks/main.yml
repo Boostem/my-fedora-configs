@@ -1,0 +1,14 @@
+- name: Install Maven
+  become: true
+  package:
+    name: maven
+    state: present
+  tags: backend
+
+- name: Install SDKMAN
+  become: true
+  shell: |
+    curl -s "https://get.sdkman.io" | bash
+  args:
+    creates: /root/.sdkman
+  tags: backend

@@ -1,0 +1,21 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Include system baseline
+      import_role:
+        name: system_baseline
+    - name: Include Flatpak setup
+      import_role:
+        name: flatpak_setup
+    - name: Include Docker setup
+      import_role:
+        name: docker_setup
+    - name: Include frontend tools setup
+      import_role:
+        name: frontend_tools
+    - name: Include backend tools setup
+      import_role:
+        name: backend_tools
+    - name: Include JetBrains setup
+      import_role:
+        name: jetbrains

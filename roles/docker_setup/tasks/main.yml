@@ -1,0 +1,24 @@
+- name: Install Docker and Docker Compose
+  become: true
+  package:
+    name:
+      - docker
+      - docker-compose
+    state: present
+  tags: docker
+
+- name: Enable and start Docker service
+  become: true
+  service:
+    name: docker
+    state: started
+    enabled: yes
+  tags: docker
+
+- name: Add user to docker group
+  become: true
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  tags: docker

@@ -1,0 +1,24 @@
+- name: Install Flatpak and Discover backend
+  become: true
+  package:
+    name:
+      - flatpak
+      - plasma-discover-flatpak
+    state: present
+  tags: flatpak
+
+- name: Add Flathub repository
+  become: true
+  shell: |
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  args:
+    creates: /var/lib/flatpak/repo/flathub.trustedkeys.gpg
+  tags: flatpak
+
+- name: Install VLC via Flatpak
+  become: true
+  shell: |
+    flatpak install -y flathub org.videolan.VLC
+  args:
+    creates: /var/lib/flatpak/app/org.videolan.VLC
+  tags: flatpak_apps
